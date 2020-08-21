@@ -1,0 +1,146 @@
+- name: Install yum-packages i3
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - i3
+    - rofi
+    - i3status
+    - dmenu
+    - i3lock
+    - xbacklight
+    - feh
+    - arandr
+    - xautolock
+    - dunst
+  tags:
+    - i3
+
+- name: Install yum-packages i3
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - rxvt-unicode
+  tags:
+    - urxvt
+
+- name: Create a directory if it does not exist
+  file:
+    path: "/home/{{ system_user }}/.config/i3"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy config file
+  copy:
+    src: files/i3_config
+    dest: "/home/{{ system_user }}/.config/i3/config"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0644"
+  tags:
+    - i3
+
+- name: copy config file
+  copy:
+    src: files/.Xresources
+    dest: "/home/{{ system_user }}/.Xresources"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0644"
+  tags:
+    - i3
+    - urxvt
+
+
+- name: copy i3exit file
+  become: true
+  copy:
+    src: files/i3exit
+    dest: "{{ bin_directory }}"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy brightness up file 
+  become: true
+  copy:
+    src: files/screenlight_up
+    dest: "{{ bin_directory }}"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy brightness down file 
+  become: true
+  copy:
+    src: files/screenlight_down
+    dest: "{{ bin_directory }}"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy urxvt extensions 
+  become: true
+  copy:
+    src: files/ext
+    dest: "/home/{{ system_user }}/.urxvt/"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+    - urxvt
+
+- name: Create a directory if it does not exist
+  file:
+    path: "/home/{{ system_user }}/.config/rofi"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy config file
+  copy:
+    src: files/rofi_config
+    dest: "/home/{{ system_user }}/.config/rofi/config"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0644"
+  tags:
+    - i3
+
+- name: Create a directory for dunst config if it does not exist
+  file:
+    path: "/home/{{ system_user }}/.config/dunst"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: copy dunst config file
+  copy:
+    remote_src: true
+    src: /usr/share/dunst/dunstrc
+    dest: "/home/{{ system_user }}/.config/dunst/"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0644"
+  tags:
+    - i3

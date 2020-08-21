@@ -1,0 +1,43 @@
+#!/bin/sh
+text_to_image(){
+    convert -font helvetica -fill red -pointsize $4 -draw "text $1,$2 '$3'" /tmp/$5 /tmp/_$5
+    mv /tmp/_$5 /tmp/$5
+
+}
+
+lock() {
+    import -window root /tmp/screenshot.png
+    convert /tmp/screenshot.png -swirl 215 -spread 6 /tmp/lock_screen.png
+    mogrify -modulate 200,50,200 /tmp/lock_screen.png
+    TEXT1="Screen locked at:"
+    TEXT2=`date '+%Y-%m-%d %H:%M:%S'`
+    text_to_image 300 300 "$TEXT1" 100 lock_screen.png
+    text_to_image 300 410 "$TEXT2" 130 lock_screen.png
+    rm /tmp/screenshot.png
+    i3lock -i /tmp/lock_screen.png
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && systemctl suspend
+        ;;
+    hibernate)
+        lock && systemctl hibernate
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+exit 0
