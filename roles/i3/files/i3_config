@@ -182,7 +182,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-exec xautolock -time 5 -locker 'i3exit lock' &
+#exec xautolock -time 5 -locker 'i3exit lock' &
 
 bindsym $mod+n move workspace to output left
 bindsym $mod+m move workspace to output right
@@ -190,20 +190,23 @@ bindsym $mod+m move workspace to output right
 bindsym $mod+Shift+g exec --no-startup-id google-chrome
 bindsym $mod+Shift+f exec --no-startup-id firefox
 bindsym $mod+c exec --no-startup-id code
-bindsym $mod+Return exec urxvt -sl 200000
+bindsym $mod+Return exec gnome-terminal
 
+
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui
 exec --no-startup-id nm-applet
 exec --no-startup-id flameshot
 exec --no-startup-id blueman-applet
-exec --no-startup-id urxvt -sl 200000
+exec --no-startup-id gnome-terminal
 exec --no-startup-id dunst -config /home/user/.config/dunst/dunstrc
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +2%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -2%
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-bindsym XF86MonBrightnessUp exec sudo /home/chreri/bin/screenlight_up
-bindsym XF86MonBrightnessDown exec sudo /home/chreri/bin/screenlight_down
+bindsym XF86MonBrightnessUp exec sudo screenlight_up
+bindsym XF86MonBrightnessDown exec sudo screenlight_down
+bindsym XF86KbdLightOnOff exec toggle_keybd_backlight
 
 bindsym $mod+z exec --no-startup-id feh ~/Pictures/i3wm_keys.png
  

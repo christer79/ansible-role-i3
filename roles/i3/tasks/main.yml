@@ -15,6 +15,7 @@
     - xautolock
     - dunst
     - network-manager-applet
+    - light
   tags:
     - i3
 
@@ -74,22 +75,15 @@
 - name: copy brightness up file 
   become: true
   copy:
-    src: files/screenlight_up
+    src: files/{{ tem }}
     dest: "{{ bin_directory }}"
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: "0755"
-  tags:
-    - i3
-
-- name: copy brightness down file 
-  become: true
-  copy:
-    src: files/screenlight_down
-    dest: "{{ bin_directory }}"
-    owner: "{{ system_user }}"
-    group: "{{ system_group }}"
-    mode: "0755"
+  with_items:
+    - screenlight_down
+    - screenlight_up
+    - toggle_keybd_backlight
   tags:
     - i3
 

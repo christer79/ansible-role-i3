@@ -1,0 +1,9 @@
+#!/usr/bin/env bash 
+
+current_level=$(light -s sysfs/leds/tpacpi::kbd_backlight -G)
+if [ "$current_level" != "100.00" ] ; then 
+	light -s sysfs/leds/tpacpi::kbd_backlight -S 100.00 
+else 
+	light -s sysfs/leds/tpacpi::kbd_backlight -S 0 
+fi
+
