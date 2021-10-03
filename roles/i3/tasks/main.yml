@@ -76,7 +76,7 @@
 - name: copy brightness up file 
   become: true
   copy:
-    src: files/{{ tem }}
+    src: files/{{ item }}
     dest: "{{ bin_directory }}"
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
