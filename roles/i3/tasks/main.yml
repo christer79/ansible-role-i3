@@ -16,6 +16,7 @@
     - dunst
     - network-manager-applet
     - light
+    - tmux
   tags:
     - i3
 
@@ -139,3 +140,24 @@
     mode: "0644"
   tags:
     - i3
+
+- name: Create a directory for tmux config if it does not exist
+  file:
+    path: "/home/{{ system_user }}/.config/tmux/"
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0755"
+  tags:
+    - i3
+
+- name: configure tmux
+  copy:
+    src: files/tmux.conf
+    dest: "/home/{{ system_user }}/.config/tmux/"
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: "0644"
+  tags:
+    - i3
+    - tmux
