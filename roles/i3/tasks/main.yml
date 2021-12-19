@@ -61,7 +61,6 @@
     - i3
     - urxvt
 
-
 - name: copy i3exit file
   become: true
   copy:
@@ -73,7 +72,7 @@
   tags:
     - i3
 
-- name: copy brightness up file 
+- name: copy brightness up file
   become: true
   copy:
     src: files/{{ item }}
@@ -88,7 +87,7 @@
   tags:
     - i3
 
-- name: copy urxvt extensions 
+- name: copy urxvt extensions
   become: true
   copy:
     src: files/ext
@@ -133,7 +132,7 @@
 - name: copy dunst config file
   copy:
     remote_src: true
-    src: /usr/share/dunst/dunstrc
+    src: /etc/dunst/dunstrc
     dest: "/home/{{ system_user }}/.config/dunst/"
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
@@ -149,7 +148,7 @@
     group: "{{ system_group }}"
     mode: "0755"
   tags:
-    - i3
+    - tmux
 
 - name: configure tmux
   copy:
@@ -159,5 +158,4 @@
     group: "{{ system_group }}"
     mode: "0644"
   tags:
-    - i3
     - tmux
