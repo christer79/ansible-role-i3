@@ -40,7 +40,7 @@
   tags:
     - i3
 
-- name: copy config file
+- name: copy ir config file
   copy:
     src: files/i3_config
     dest: "/home/{{ system_user }}/.config/i3/config"
@@ -50,7 +50,7 @@
   tags:
     - i3
 
-- name: copy config file
+- name: copy .Xresources config file
   copy:
     src: files/.Xresources
     dest: "/home/{{ system_user }}/.Xresources"
@@ -109,7 +109,7 @@
   tags:
     - i3
 
-- name: copy config file
+- name: copy rofi config file
   copy:
     src: files/rofi_config
     dest: "/home/{{ system_user }}/.config/rofi/config"
