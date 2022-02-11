@@ -199,6 +199,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id blueman-applet
 exec --no-startup-id gnome-terminal
 exec --no-startup-id dunst -config /home/user/.config/dunst/dunstrc
+exec --no-startup-id screenkey
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +2%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -2%
